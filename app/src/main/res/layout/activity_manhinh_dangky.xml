@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".manhinh_dangky">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="275dp"
+            android:src="@drawable/topremove" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ĐĂNG KÝ"
+            android:layout_marginTop="105dp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="50dp"
+            android:layout_gravity="center"
+            />
+    </FrameLayout>
+    <EditText
+        android:layout_marginTop="50dp"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:hint="Số Điện Thoại"
+        android:padding="18dp"
+        android:drawableStart="@drawable/phone"
+        android:drawablePadding="8dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/viendang_nhap"
+        />
+    <EditText
+        android:layout_marginTop="15dp"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:hint="Mật Khẩu"
+        android:padding="18dp"
+        android:drawableStart="@drawable/pass"
+        android:drawablePadding="8dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/viendang_nhap"
+        />
+    <EditText
+        android:layout_marginTop="15dp"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:hint="Nhập Lại Mật Khẩu"
+        android:padding="18dp"
+        android:drawableStart="@drawable/pass"
+        android:drawablePadding="8dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/viendang_nhap"
+        />
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:textColor="@color/white"
+        android:text="ĐĂNG KÝ"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center_horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đã có tài khoản?"
+            />
+
+        <Button
+            android:id="@+id/btndnhap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00BF25CC"
+            android:text="Đăng Nhập"
+            android:textAllCaps="false"
+            android:textColor="#BF25CC" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".frag_trangchu">
+
+    <SearchView
+        android:layout_marginTop="10sp"
+        android:id="@+id/searchview"
+        android:layout_width="400sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:queryHint="Giày Air Force 1"
+        android:background="@drawable/searchview"
+        />
+    <com.denzcoskun.imageslider.ImageSlider
+        android:id="@+id/image_slider"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        app:iss_auto_cycle="true"
+        app:iss_period="1000"
+        app:iss_delay="1000"
+        app:iss_text_align="CENTER"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Brands"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+        android:id="@+id/rcvbtn"
+           />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvsneakers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp" />
+
+</LinearLayout>
