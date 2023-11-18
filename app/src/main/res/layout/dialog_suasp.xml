@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_margin="10dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SỬA SẢN PHẨM"
+        android:textSize="30sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textColor="#FF0000"
+        android:fontFamily="sans-serif-black"
+        android:layout_gravity="center_horizontal"
+        />
+    <EditText
+        android:id="@+id/txturl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập URL ảnh"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="5dp"
+        android:padding="10dp"/>
+    <EditText
+        android:id="@+id/txtid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID Sản Phẩm"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="5dp"
+        android:padding="10dp"/>
+    <EditText
+        android:id="@+id/txtten"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên Sản Phẩm"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="5dp"
+        android:padding="10dp"/>
+    <EditText
+        android:id="@+id/txtgia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Giá Sản Phẩm"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="5dp"
+        android:padding="10dp"/>
+    <EditText
+        android:id="@+id/txtmota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mô tả Sản Phẩm"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="5dp"
+        android:padding="10dp"/>
+        <Button
+            android:id="@+id/btnluu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lưu"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="end"
+            android:textColor="#FFFFFF"
+            android:background="#448AFF"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
