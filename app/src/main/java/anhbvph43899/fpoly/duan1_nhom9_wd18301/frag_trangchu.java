@@ -20,18 +20,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 //import anhbvph43899.fpoly.duan1_nhom9_wd18301.DAO.SneakersTCDAO;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.DAO.SanPhamDAO;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.adapter.BrandsAdapter;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.adapter.SneakersAdapter;
-import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.SneakersTrangChu;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.SanPham;
 
 
 public class frag_trangchu extends Fragment {
     SneakersAdapter sneakersAdapter;
 //    SneakersTCDAO sneakersTCDAO;
 SearchView searchView;
-    ArrayList<SneakersTrangChu> searchList;
+SanPhamDAO sanPhamDAO;
+    ArrayList<SanPham> searchList;
 
-    ArrayList<SneakersTrangChu> list = new ArrayList<>();
+    ArrayList<SanPham> list = new ArrayList<>();
     public frag_trangchu() {
         // Required empty public constructor
     }
@@ -49,6 +51,8 @@ SearchView searchView;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         RecyclerView rcv, rcvsneaker;
+        sanPhamDAO = new SanPhamDAO(getContext());
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_frag_trangchu, container, false);
 
@@ -76,13 +80,7 @@ SearchView searchView;
         lists.add(String.valueOf(R.drawable.vans));
         rcv.setAdapter(new BrandsAdapter(lists));
         rcvsneaker = view.findViewById(R.id.rcvsneakers);
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air1 Puma", 600000,0));
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air2 Adidas", 700000,1));
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air3 Nike", 800000,2));
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air4 Converse", 900000,3));
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air5 Vans", 1000000,4));
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air6 Tesla", 2000000,5));
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air7 Way", 3000000,6));
+        list = sanPhamDAO.selectAll();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
         rcvsneaker.setLayoutManager(gridLayoutManager);
         sneakersAdapter = new SneakersAdapter(getContext(), list);
@@ -95,11 +93,12 @@ SearchView searchView;
                 if (query.length() > 0) {
                     for(int i = 0; i < list.size(); i++) {
                         if(list.get(i).getTensp().toUpperCase().contains(query.toUpperCase())) {
-                            SneakersTrangChu s = new SneakersTrangChu();
-                            s.setAnhsp(list.get(i).getAnhsp());
+                            SanPham s = new SanPham();
+                            s.setIdSP(list.get(i).getIdSP());
+                            s.setAnh(list.get(i).getAnh());
                             s.setTensp(list.get(i).getTensp());
                             s.setGia(list.get(i).getGia());
-                            s.setDaban(list.get(i).getDaban());
+                            s.setMotaSP(list.get(i).getMotaSP());
                             searchList.add(s);
                         }
                     }
@@ -124,11 +123,13 @@ SearchView searchView;
                 if (newText.length() > 0) {
                     for(int i = 0; i < list.size(); i++) {
                         if(list.get(i).getTensp().toUpperCase().contains(newText.toUpperCase())) {
-                            SneakersTrangChu s = new SneakersTrangChu();
-                            s.setAnhsp(list.get(i).getAnhsp());
+                            SanPham s = new SanPham();
+                            s.setIdSP(list.get(i).getIdSP());
+                            s.setAnh(list.get(i).getAnh());
                             s.setTensp(list.get(i).getTensp());
                             s.setGia(list.get(i).getGia());
-                            s.setDaban(list.get(i).getDaban());
+                            s.setMotaSP(list.get(i).getMotaSP());
+                            searchList.add(s);
                             searchList.add(s);
                         }
                     }

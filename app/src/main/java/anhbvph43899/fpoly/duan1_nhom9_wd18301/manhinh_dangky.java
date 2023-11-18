@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 public class manhinh_dangky extends AppCompatActivity {
 Button btndnhap;
     @Override
@@ -21,5 +22,6 @@ Button btndnhap;
                 startActivity(intent);
             }
         });
+
     }
 }

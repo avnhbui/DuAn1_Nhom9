@@ -9,18 +9,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.DAO.SanPhamDAO;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.adapter.SneakersAdapter;
-import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.SneakersTrangChu;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.SanPham;
 
 
 public class frag_sneakers extends Fragment {
+    SearchView searchView;
     SneakersAdapter sneakersAdapter;
     //    SneakersTCDAO sneakersTCDAO;
-    ArrayList<SneakersTrangChu> list = new ArrayList<>();
-
+    ArrayList<SanPham> searchList;
+    ArrayList<SanPham> list = new ArrayList<>();
+    RecyclerView rcvsneaker;
+    SanPhamDAO sanPhamDAO;
     public frag_sneakers() {
         // Required empty public constructor
     }
@@ -35,21 +40,80 @@ public class frag_sneakers extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        RecyclerView rcvsneaker;
+        sanPhamDAO = new SanPhamDAO(getContext());
+
 
         View view = inflater.inflate(R.layout.fragment_frag_sneakers, container, false);
         rcvsneaker = view.findViewById(R.id.rcvsneakers);
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air1", 600000,0));
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air2", 700000,1));
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air3", 800000,2));
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air4", 900000,3));
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air5", 1000000,4));
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air6", 2000000,5));
-        list.add(new SneakersTrangChu(R.drawable.airnu,"Air7", 3000000,6));
+        list = sanPhamDAO.selectAll();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
         rcvsneaker.setLayoutManager(gridLayoutManager);
         sneakersAdapter = new SneakersAdapter(getContext(), list);
         rcvsneaker.setAdapter(sneakersAdapter);
+        searchView = view.findViewById(R.id.searchview);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchList = new ArrayList<>();
+                if (query.length() > 0) {
+                    for(int i = 0; i < list.size(); i++) {
+                        if(list.get(i).getTensp().toUpperCase().contains(query.toUpperCase())) {
+                            SanPham s = new SanPham();
+                            s.setIdSP(list.get(i).getIdSP());
+                            s.setAnh(list.get(i).getAnh());
+                            s.setTensp(list.get(i).getTensp());
+                            s.setGia(list.get(i).getGia());
+                            s.setMotaSP(list.get(i).getMotaSP());
+                            searchList.add(s);
+                        }
+                    }
+                    GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(),2);
+                    rcvsneaker.setLayoutManager(gridLayoutManager1);
+                    sneakersAdapter = new SneakersAdapter(getContext(), searchList);
+                    rcvsneaker.setAdapter(sneakersAdapter);
+                    sneakersAdapter.notifyDataSetChanged();
+                } else {
+                    GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(),2);
+                    rcvsneaker.setLayoutManager(gridLayoutManager1);
+                    sneakersAdapter = new SneakersAdapter(getContext(), list);
+                    rcvsneaker.setAdapter(sneakersAdapter);
+                    sneakersAdapter.notifyDataSetChanged();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList = new ArrayList<>();
+                if (newText.length() > 0) {
+                    for(int i = 0; i < list.size(); i++) {
+                        if(list.get(i).getTensp().toUpperCase().contains(newText.toUpperCase())) {
+                            SanPham s = new SanPham();
+                            s.setIdSP(list.get(i).getIdSP());
+                            s.setAnh(list.get(i).getAnh());
+                            s.setTensp(list.get(i).getTensp());
+                            s.setGia(list.get(i).getGia());
+                            s.setMotaSP(list.get(i).getMotaSP());
+                            searchList.add(s);
+                            searchList.add(s);
+                        }
+                    }
+                    GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(),2);
+                    rcvsneaker.setLayoutManager(gridLayoutManager1);
+                    sneakersAdapter = new SneakersAdapter(getContext(), searchList);
+                    rcvsneaker.setAdapter(sneakersAdapter);
+                    sneakersAdapter.notifyDataSetChanged();
+                } else {
+                    GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(),2);
+                    rcvsneaker.setLayoutManager(gridLayoutManager1);
+                    sneakersAdapter = new SneakersAdapter(getContext(), list);
+                    rcvsneaker.setAdapter(sneakersAdapter);
+                    sneakersAdapter.notifyDataSetChanged();
+                }
+                return false;
+
+            }
+        });
         return view;
     }
-}
+    }

@@ -52,10 +52,7 @@ public class Nav extends AppCompatActivity implements NavigationView.OnNavigatio
                 fraght = frag_snk;
             }
         }else if(id == R.id.nav_giohang){
-            if(fraght != frag_gh){
-                thaythefrag(new frag_trangchu());
-                fraght = frag_gh;
-            }
+
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
