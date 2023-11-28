@@ -29,10 +29,11 @@ public class SanPhamDAO {
                 while (!cursor.isAfterLast()) {
                     SanPham sp = new SanPham();
                     sp.setIdSP(cursor.getInt(0));
-                    sp.setTensp(cursor.getString(1));
-                    sp.setGia(cursor.getInt(2));
-                    sp.setMotaSP(cursor.getString(3));
-                    sp.setAnh(cursor.getString(4));
+                    sp.setIdloaiSP(cursor.getInt(1));
+                    sp.setTensp(cursor.getString(2));
+                    sp.setGia(cursor.getInt(3));
+                    sp.setMotaSP(cursor.getString(4));
+                    sp.setAnh(cursor.getString(5));
                     list.add(sp);
                     cursor.moveToNext();
                 }
@@ -52,10 +53,11 @@ public class SanPhamDAO {
                 while (!cursor.isAfterLast()) {
                     SanPham sp = new SanPham();
                     sp.setIdSP(cursor.getInt(0));
-                    sp.setTensp(cursor.getString(1));
-                    sp.setGia(cursor.getInt(2));
-                    sp.setMotaSP(cursor.getString(3));
-                    sp.setAnh(cursor.getString(4));
+                    sp.setIdloaiSP(cursor.getInt(1));
+                    sp.setTensp(cursor.getString(2));
+                    sp.setGia(cursor.getInt(3));
+                    sp.setMotaSP(cursor.getString(4));
+                    sp.setAnh(cursor.getString(5));
                     list.add(sp);
                     cursor.moveToNext();
                 }
@@ -69,6 +71,7 @@ public class SanPhamDAO {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("idSP", sp.getIdSP());
+        values.put("idloaiSP", sp.getIdloaiSP());
         values.put("tenSP", sp.getTensp());
         values.put("gia", sp.getGia());
         values.put("mota_SP", sp.getMotaSP());
@@ -80,6 +83,7 @@ public class SanPhamDAO {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("idSP", sp.getIdSP());
+        values.put("idloaiSP", sp.getIdloaiSP());
         values.put("tenSP", sp.getTensp());
         values.put("gia", sp.getGia());
         values.put("mota_SP", sp.getMotaSP());

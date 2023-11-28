@@ -1,12 +1,9 @@
-package anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment;
+package anhbvph43899.fpoly.duan1_nhom9_wd18301.fragadmin;
 
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import android.widget.Button;
-import android.widget.SearchView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -17,40 +14,44 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.List;
 
-//import anhbvph43899.fpoly.duan1_nhom9_wd18301.DAO.SneakersTCDAO;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.DAO.LoaiSPDAO;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.DAO.SanPhamDAO;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.R;
-import anhbvph43899.fpoly.duan1_nhom9_wd18301.adapter.BrandsAdapter;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.adapter.QLSPAdapter;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.adapter.SneakersAdapter;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.LoaiSP;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.SanPham;
 
 
-public class frag_trangchu extends Fragment {
-    SneakersAdapter sneakersAdapter;
-//    SneakersTCDAO sneakersTCDAO;
-SearchView searchView;
-SanPhamDAO sanPhamDAO;
-    ArrayList<SanPham> searchList;
+public class fragad_qlsp extends Fragment {
+    QLSPAdapter qlspAdapter;
 
+    SearchView searchView;
+    SanPhamDAO sanPhamDAO;
+    ArrayList<SanPham> searchList;
+    Spinner spnLoaiSP;
+int index;
     ArrayList<SanPham> list = new ArrayList<>();
     TextView txturl, txtid, txtten, txtgia, txtmota;
     Button btnthem;
+    LoaiSPDAO loaiSPDAO;
     FloatingActionButton fltbtnThem;
-    public frag_trangchu() {
+
+    public fragad_qlsp() {
         // Required empty public constructor
     }
-
 
 
 
@@ -63,41 +64,17 @@ SanPhamDAO sanPhamDAO;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        RecyclerView rcv, rcvsneaker;
+        RecyclerView rcvsneaker;
         sanPhamDAO = new SanPhamDAO(getContext());
-
+        loaiSPDAO = new LoaiSPDAO(getContext());
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_frag_trangchu, container, false);
-
-        ArrayList<SlideModel> imageList = new ArrayList<>(); // Create image list
-
-// imageList.add(new SlideModel("String Url" or R.drawable);
-// imageList.add(new SlideModel("String Url" or R.drawable, "title"); You can add title
-
-        imageList.add(new SlideModel("https://img.muji.net/img/item/4550344414644_1260.jpg",  ScaleTypes.CENTER_CROP));
-        imageList.add(new SlideModel("https://pos.nvncdn.net/90be09-25766/ps/20221006_WfYTAEMDjtzmvBwrSrk5X9Yj.jpg",  ScaleTypes.CENTER_CROP));
-        imageList.add(new SlideModel("https://1sneaker.vn/wp-content/uploads/2023/04/giay-sneaker-adidas-superstar-mau-trang-3.jpg", ScaleTypes.CENTER_CROP));
-
-        ImageSlider imageSlider = view.findViewById(R.id.image_slider);
-        imageSlider.setImageList(imageList);
-        rcv = view.findViewById(R.id.rcvbtn);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        rcv.setLayoutManager(linearLayoutManager);
-        List<String> lists= new ArrayList<>();
-        lists.add(String.valueOf(R.drawable.nike));
-        lists.add(String.valueOf(R.drawable.puma));
-        lists.add(String.valueOf(R.drawable.adidas));
-        lists.add(String.valueOf(R.drawable.bitis));
-        lists.add(String.valueOf(R.drawable.converse));
-        lists.add(String.valueOf(R.drawable.vans));
-        rcv.setAdapter(new BrandsAdapter(lists));
+        View view = inflater.inflate(R.layout.fragment_fragad_qlsp, container, false);
         rcvsneaker = view.findViewById(R.id.rcvsneakers);
         list = sanPhamDAO.selectAll();
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
-        rcvsneaker.setLayoutManager(gridLayoutManager);
-        sneakersAdapter = new SneakersAdapter(getContext(), list);
-        rcvsneaker.setAdapter(sneakersAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rcvsneaker.setLayoutManager(linearLayoutManager);
+        qlspAdapter = new QLSPAdapter(getContext(), list);
+        rcvsneaker.setAdapter(qlspAdapter);
         searchView = view.findViewById(R.id.searchview);
         fltbtnThem = view.findViewById(R.id.fltbtnThem);
         fltbtnThem.setOnClickListener(new View.OnClickListener() {
@@ -124,15 +101,15 @@ SanPhamDAO sanPhamDAO;
                     }
                     GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(),2);
                     rcvsneaker.setLayoutManager(gridLayoutManager1);
-                    sneakersAdapter = new SneakersAdapter(getContext(), searchList);
-                    rcvsneaker.setAdapter(sneakersAdapter);
-                    sneakersAdapter.notifyDataSetChanged();
+                    qlspAdapter = new QLSPAdapter(getContext(), searchList);
+                    rcvsneaker.setAdapter(qlspAdapter);
+                    qlspAdapter.notifyDataSetChanged();
                 } else {
                     GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(),2);
                     rcvsneaker.setLayoutManager(gridLayoutManager1);
-                    sneakersAdapter = new SneakersAdapter(getContext(), list);
-                    rcvsneaker.setAdapter(sneakersAdapter);
-                    sneakersAdapter.notifyDataSetChanged();
+                    qlspAdapter = new QLSPAdapter(getContext(), list);
+                    rcvsneaker.setAdapter(qlspAdapter);
+                    qlspAdapter.notifyDataSetChanged();
                 }
                 return false;
             }
@@ -155,15 +132,15 @@ SanPhamDAO sanPhamDAO;
                     }
                     GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(),2);
                     rcvsneaker.setLayoutManager(gridLayoutManager1);
-                    sneakersAdapter = new SneakersAdapter(getContext(), searchList);
-                    rcvsneaker.setAdapter(sneakersAdapter);
-                    sneakersAdapter.notifyDataSetChanged();
+                    qlspAdapter = new QLSPAdapter(getContext(), searchList);
+                    rcvsneaker.setAdapter(qlspAdapter);
+                    qlspAdapter.notifyDataSetChanged();
                 } else {
                     GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(),2);
                     rcvsneaker.setLayoutManager(gridLayoutManager1);
-                    sneakersAdapter = new SneakersAdapter(getContext(), list);
-                    rcvsneaker.setAdapter(sneakersAdapter);
-                    sneakersAdapter.notifyDataSetChanged();
+                    qlspAdapter = new QLSPAdapter(getContext(), list);
+                    rcvsneaker.setAdapter(qlspAdapter);
+                    qlspAdapter.notifyDataSetChanged();
                 }
                 return false;
 
@@ -183,8 +160,28 @@ SanPhamDAO sanPhamDAO;
         txtid = view.findViewById(R.id.txtid);
         txtten = view.findViewById(R.id.txtten);
         txtgia = view.findViewById(R.id.txtgia);
+        spnLoaiSP = view.findViewById(R.id.spnLoaiSP);
         txtmota = view.findViewById(R.id.txtmota);
         btnthem = view.findViewById(R.id.btnthem);
+        ArrayList<LoaiSP> listLS = new ArrayList<>();
+        listLS = loaiSPDAO.selectAll();
+        ArrayList<String> loaiSPArr = new ArrayList<>();
+        for (LoaiSP x: listLS) {
+            loaiSPArr.add(x.getTenLoaiSP());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, loaiSPArr);
+        spnLoaiSP.setAdapter(adapter);
+        spnLoaiSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                index = loaiSPDAO.getMaLoai(loaiSPArr.get(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         btnthem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,11 +198,11 @@ SanPhamDAO sanPhamDAO;
                     } else if(Integer.valueOf(gia) < 0) {
                         Toast.makeText(getContext(), "Giá tiền phải lớn hơn 0", Toast.LENGTH_SHORT).show();
                     }
-                    else if(sanPhamDAO.insert(new SanPham(Integer.parseInt(id), ten, Integer.parseInt(gia), mota, url))) {
+                    else if(sanPhamDAO.insert(new SanPham(Integer.parseInt(id), ten, Integer.parseInt(gia), mota, url, index))) {
                         list.clear();
                         list.addAll(sanPhamDAO.selectAll());
                         dialog.dismiss();
-                        sneakersAdapter.notifyDataSetChanged();
+                        qlspAdapter.notifyDataSetChanged();
                         Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();

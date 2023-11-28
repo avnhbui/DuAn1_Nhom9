@@ -1,4 +1,4 @@
-package anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment;
+package anhbvph43899.fpoly.duan1_nhom9_wd18301.fragadmin;
 
 import android.os.Bundle;
 
@@ -11,10 +11,9 @@ import android.view.ViewGroup;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.R;
 
 
-public class frag_giohang extends Fragment {
+public class fragad_qldonhang extends Fragment {
 
-
-    public frag_giohang() {
+    public fragad_qldonhang() {
         // Required empty public constructor
     }
 
@@ -28,6 +27,6 @@ public class frag_giohang extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frag_giohang, container, false);
+        return inflater.inflate(R.layout.fragment_fragad_qldonhang, container, false);
     }
 }

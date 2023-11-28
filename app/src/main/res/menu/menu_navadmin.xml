@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <group android:checkableBehavior="single">
-    <item android:id="@+id/nav_trangchu"
-        android:title="Trang chủ"
-        android:icon="@drawable/home"
+    <item android:id="@+id/navad_qlsp"
+        android:title="QL Sản Phẩm"
+        android:icon="@drawable/sneakers"
         />
-    <item android:id="@+id/nav_loaisp"
-        android:title="Loại Sản Phẩm"
+    <item android:id="@+id/navad_qllsp"
+        android:title="QL Loại SP"
         android:icon="@drawable/order"
         />
-    <item android:id="@+id/nav_giohang"
-        android:title="Giỏ hàng"
-        android:icon="@drawable/cart"
-        />
-    <item android:id="@+id/nav_donmua"
-        android:title="Đơn mua"
-        android:icon="@drawable/order"
-        />
-    <item android:id="@+id/nav_feedback"
+    <item android:id="@+id/navad_qlfeedback"
         android:title="Feedback"
         android:icon="@drawable/review"
         />
+    <item android:id="@+id/navad_qldonmua"
+        android:title="Đơn mua"
+        android:icon="@drawable/order"
+        />
     <item android:title="Khác">
         <menu>
-            <item android:id="@+id/nav_doimk"
+            <item android:id="@+id/navad_doimk"
                 android:title="Đổi mật khẩu"
                 android:icon="@drawable/pass"
                 />
-            <item android:id="@+id/nav_dangxuat"
+            <item android:id="@+id/navad_dangxuat"
                 android:title="Đăng xuất"
                 android:icon="@drawable/logout"
                 />

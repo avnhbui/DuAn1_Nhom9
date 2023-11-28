@@ -29,10 +29,11 @@
             />
     </FrameLayout>
     <EditText
+        android:id="@+id/sdt"
         android:layout_marginTop="60dp"
         android:layout_width="350dp"
         android:layout_height="60dp"
-        android:hint="Số Điện Thoại"
+        android:hint="Tài khoản"
         android:padding="18dp"
         android:drawableStart="@drawable/phone"
         android:drawablePadding="8dp"
@@ -40,6 +41,7 @@
         android:background="@drawable/viendang_nhap"
         />
     <EditText
+        android:id="@+id/password"
         android:layout_marginTop="15dp"
         android:layout_width="350dp"
         android:layout_height="60dp"
@@ -57,13 +59,16 @@
         android:layout_gravity="center_horizontal"
         >
         <CheckBox
+            android:id="@+id/chkluu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Lưu thông tin"
             android:layout_marginLeft="30sp"
+            android:onClick="SaveUp"
             android:paddingRight="50dp"
             />
         <Button
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quên mật khẩu?"
@@ -73,10 +78,12 @@
             />
     </LinearLayout>
     <Button
+        android:id="@+id/btndn"
         android:layout_width="350dp"
         android:layout_height="55dp"
         android:textColor="#FFFFFF"
         android:text="ĐĂNG NHẬP"
+        android:onClick="checkLogin"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:background="@drawable/btn"

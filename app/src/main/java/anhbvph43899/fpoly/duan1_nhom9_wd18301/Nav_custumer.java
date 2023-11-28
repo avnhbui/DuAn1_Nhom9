@@ -15,24 +15,28 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
-import anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment.frag_donmua;
-import anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment.frag_feedback;
-import anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment.frag_giohang;
-import anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment.frag_trangchu;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.fragadmin.frag_QLLoaiSP;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment_cus.frag_donmua;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment_cus.frag_feedback;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment_cus.frag_giohang;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment_cus.frag_loaisp;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment_cus.frag_trangchu;
 
-public class Nav extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Nav_custumer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final int frag_tc = 0;
     private static final int frag_gh = 1;
     private static final int frag_dm = 2;
     private static final int frag_fb = 3;
+    private static final int frag_loaisp = 4;
+
     private int fraght = frag_tc;
 
     private DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav);
+        setContentView(R.layout.nav_cus);
         drawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,6 +62,11 @@ public class Nav extends AppCompatActivity implements NavigationView.OnNavigatio
                 thaythefrag(new frag_giohang());
                 fraght = frag_gh;
             }
+        }else if(id == R.id.nav_loaisp){
+            if(fraght != frag_loaisp){
+                thaythefrag(new frag_loaisp());
+                fraght = frag_loaisp;
+            }
         }else if(id == R.id.nav_donmua){
             if(fraght != frag_dm){
                 thaythefrag(new frag_donmua());
@@ -69,7 +78,7 @@ public class Nav extends AppCompatActivity implements NavigationView.OnNavigatio
                 fraght = frag_fb;
             }
         }else if(id == R.id.nav_dangxuat){
-            Intent intent = new Intent(Nav.this, manhinh_login.class);
+            Intent intent = new Intent(Nav_custumer.this, manhinh_login.class);
             startActivity(intent);
         }
         drawerLayout.closeDrawer(GravityCompat.START);

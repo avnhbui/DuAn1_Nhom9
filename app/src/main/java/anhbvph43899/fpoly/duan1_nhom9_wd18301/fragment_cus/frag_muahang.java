@@ -1,40 +1,40 @@
-package anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment;
+package anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment_cus;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Context;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.R;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.adapter.HoaDonAdapter;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.SPBienThe;
 
 
-public class TaoDon extends Fragment {
+public class frag_muahang extends Fragment {
 
-
-    public TaoDon() {
+    ImageView imganhmua;
+    HoaDonAdapter adapter;
+    TextView tvtenspmua,tvgiaspmua,soluong, tvloai;
+    ImageButton btntru, btncong, btndathang;
+    Spinner spnsize, spncolor;
+    public frag_muahang() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,53 +46,31 @@ public class TaoDon extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_tao_don, container, false);
-        Button btndathang;
-        ImageView imganh;
-        TextView tvtensp, tvgiasp, tvmota;
-        imganh = view.findViewById(R.id.imganh);
-        tvtensp = view.findViewById(R.id.tvtensp);
-        tvgiasp = view.findViewById(R.id.tvgiasp);
-        tvmota = view.findViewById(R.id.tvmota);
+        View view = inflater.inflate(R.layout.fragment_frag_muahang, container, false);
+        spnsize = view.findViewById(R.id.spnsize);
+        spncolor  = view.findViewById(R.id.spncolor);
+        imganhmua = view.findViewById(R.id.imganhmua);
+        tvtenspmua = view.findViewById(R.id.tvtenspmua);
+        tvgiaspmua = view.findViewById(R.id.tvgiaspmua);
+        tvloai = view.findViewById(R.id.tvloai);
+        soluong = view.findViewById(R.id.soluong);
+        btntru =view.findViewById(R.id.btntru);
+        btncong = view.findViewById(R.id.btncong);
+        btndathang = view.findViewById(R.id.btndathang);
         Bundle bundle = getArguments();
         if (bundle != null) {
             String anh = bundle.getString("anh");
             String ten = bundle.getString("ten");
             String gia = bundle.getString("gia");
-            String mota = bundle.getString("mota");
+            String loaisp = bundle.getString("tenloaisp");
+
             Glide.with(this)
                     .load(anh)
-                    .into(imganh);
-            tvtensp.setText(ten);
-            tvgiasp.setText(gia);
-            tvmota.setText(mota);
+                    .into(imganhmua);
+            tvtenspmua.setText(ten);
+            tvgiaspmua.setText(gia);
+            tvloai.setText(loaisp);
         }
-        btndathang = view.findViewById(R.id.btndathang);
-        btndathang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDialogTAODon();
-            }
-        });
-
-    return view;
-    }
-    public void openDialogTAODon() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        LayoutInflater inflater = (getActivity().getLayoutInflater());
-        View view = inflater.inflate(R.layout.dialog_muahang, null);
-        builder.setView(view);
-        Dialog dialog = builder.create();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-        TextView soluong;
-        ImageButton btntru, btncong;
-        Spinner spnsize, spncolor;
-        spnsize = view.findViewById(R.id.spnsize);
-        spncolor  = view.findViewById(R.id.spncolor);
-        soluong = view.findViewById(R.id.soluong);
-        btntru =view.findViewById(R.id.btntru);
-        btncong = view.findViewById(R.id.btncong);
         final int[] counter = {0};
         btncong.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +91,13 @@ public class TaoDon extends Fragment {
                 }
             }
         });
+        btndathang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
         ArrayList<String> arrspnsize = new ArrayList<>();
         arrspnsize.add("37");
         arrspnsize.add("38");
@@ -130,5 +115,10 @@ public class TaoDon extends Fragment {
         arrspncolor.add("Đen");
         ArrayAdapter<String> adapterspncolor = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, arrspncolor);
         spncolor.setAdapter(adapterspncolor);
+
+        return view;
     }
+
+
+
 }

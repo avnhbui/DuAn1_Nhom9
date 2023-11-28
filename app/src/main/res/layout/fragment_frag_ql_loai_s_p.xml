@@ -3,14 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_cus.frag_donmua">
+    tools:context=".fragadmin.frag_QLLoaiSP">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvsneakersdonmua"
+        android:id="@+id/rcvsneakers"
         android:layout_width="match_parent"
         android:layout_height="650sp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fltbtnThem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/btnadd"
+        android:layout_margin="20dp"
+        android:backgroundTint="#8692F7"
+        android:layout_gravity="bottom|end"/>
 
 </FrameLayout>
