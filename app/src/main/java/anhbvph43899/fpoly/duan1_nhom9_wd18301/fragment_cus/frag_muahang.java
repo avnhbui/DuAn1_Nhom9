@@ -1,28 +1,46 @@
 package anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment_cus;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.DAO.GioHangDAO;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.R;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.adapter.HoaDonAdapter;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.GIoHang;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.LoaiSP;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.SPBienThe;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.SanPham;
 
 
 public class frag_muahang extends Fragment {
@@ -30,8 +48,10 @@ public class frag_muahang extends Fragment {
     ImageView imganhmua;
     HoaDonAdapter adapter;
     TextView tvtenspmua,tvgiaspmua,soluong, tvloai;
-    ImageButton btntru, btncong, btndathang;
+    Button btngiohang;
     Spinner spnsize, spncolor;
+    GioHangDAO gioHangDAO;
+    ArrayList<GIoHang> list = new ArrayList<>();
     public frag_muahang() {
         // Required empty public constructor
     }
@@ -42,6 +62,7 @@ public class frag_muahang extends Fragment {
 
     }
 
+    @SuppressLint("WrongThread")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,51 +74,53 @@ public class frag_muahang extends Fragment {
         tvtenspmua = view.findViewById(R.id.tvtenspmua);
         tvgiaspmua = view.findViewById(R.id.tvgiaspmua);
         tvloai = view.findViewById(R.id.tvloai);
-        soluong = view.findViewById(R.id.soluong);
-        btntru =view.findViewById(R.id.btntru);
-        btncong = view.findViewById(R.id.btncong);
-        btndathang = view.findViewById(R.id.btndathang);
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            String anh = bundle.getString("anh");
-            String ten = bundle.getString("ten");
-            String gia = bundle.getString("gia");
-            String loaisp = bundle.getString("tenloaisp");
+        btngiohang = view.findViewById(R.id.btngiohang);
+
+        Bundle bundle1 = getArguments();
+        if (bundle1 != null) {
+            String anh = bundle1.getString("anh1");
+            String ten = bundle1.getString("ten1");
+            String gia = bundle1.getString("gia1");
+            String mota = bundle1.getString("mota1");
+            String loaisp = bundle1.getString("tenloaisp1");
 
             Glide.with(this)
                     .load(anh)
                     .into(imganhmua);
             tvtenspmua.setText(ten);
             tvgiaspmua.setText(gia);
-            tvloai.setText(loaisp);
         }
-        final int[] counter = {0};
-        btncong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                counter[0]++;
-                soluong.setText(String.valueOf(counter[0]));
-            }
-        });
-        btntru.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (counter[0] > 0) {
-                    counter[0]--;
-                    soluong.setText(String.valueOf(counter[0]));
-                } else {
-                    // Giảm dưới 0 sẽ không được phép, không làm gì cả hoặc hiển thị thông báo
-                    // Toast.makeText(MainActivity.this, "Giá trị không thể âm", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        btndathang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        String imagePath = "";
+
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) imganhmua.getDrawable();
+            Bitmap bitmap = bitmapDrawable.getBitmap();
 
 
-            }
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        gioHangDAO = new GioHangDAO(getContext());
+        btngiohang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                        String tensp = tvtenspmua.getText().toString();
+                        String gia = tvgiaspmua.getText().toString();
+                        String size = String.valueOf(spnsize.getSelectedItem());
+                        String mau = String.valueOf(spncolor.getSelectedItem());
+
+                if ( tensp.isEmpty() || gia.isEmpty() || size.isEmpty() || mau.isEmpty()){
+                    Toast.makeText(getContext(), "Thiếu dữ liệu", Toast.LENGTH_SHORT).show();
+                            } else if (gioHangDAO.insert(new GIoHang(tensp, Integer.parseInt(gia), size, mau, String.valueOf(byteArray)))) {
+                                list.clear();
+                                list.addAll(gioHangDAO.selectAll());
+                                Toast.makeText(getContext(), "Thành công", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        }
         });
+
         ArrayList<String> arrspnsize = new ArrayList<>();
         arrspnsize.add("37");
         arrspnsize.add("38");

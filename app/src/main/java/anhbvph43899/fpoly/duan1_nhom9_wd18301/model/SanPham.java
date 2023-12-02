@@ -10,22 +10,15 @@ public class SanPham {
     private String anh;
 
 
-    public SanPham(int idSP, String tensp, int gia, String loaisp, String motaSP, String anh) {
+    public SanPham(int idSP, String tensp, int gia, int idloaiSP, String motaSP, String anh) {
         this.idSP = idSP;
         this.tensp = tensp;
         this.gia = gia;
-        this.loaisp = loaisp;
-        this.motaSP = motaSP;
-        this.anh = anh;
-    }
-    public SanPham(int idSP, String tensp, int gia,String motaSP, String anh, int idloaiSP) {
-        this.idSP = idSP;
-        this.tensp = tensp;
-        this.gia = gia;
-        this.motaSP = motaSP;
-        this.anh = anh;
         this.idloaiSP = idloaiSP;
+        this.motaSP = motaSP;
+        this.anh = anh;
     }
+
     public SanPham() {
     }
     public int getIdloaiSP() {

@@ -36,12 +36,12 @@ public class LoaiSPCusApdapter extends RecyclerView.Adapter<LoaiSPCusApdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull LoaiSPCusApdapter.ViewHolder holder, int position) {
-        holder.tvtenloaisp.setText(list.get(position).getTenLoaiSP());
+        holder.tvtenloaisp.setText(String.valueOf(list.get(position).getTenLoaiSP()));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

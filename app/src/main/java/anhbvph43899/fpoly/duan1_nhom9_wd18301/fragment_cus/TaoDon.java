@@ -47,7 +47,7 @@ public class TaoDon extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tao_don, container, false);
-        Button btndathang;
+        Button btndathang, themgiohang;
         ImageView imganh;
         TextView tvtensp, tvgiasp, tvmota, tvloaisp;
         imganh = view.findViewById(R.id.imganh);
@@ -55,13 +55,14 @@ public class TaoDon extends Fragment {
         tvgiasp = view.findViewById(R.id.tvgiasp);
         tvmota = view.findViewById(R.id.tvmota);
         tvloaisp = view.findViewById(R.id.tvloaisp);
+        themgiohang = view.findViewById(R.id.themgiohang);
 
         Bundle bundle = getArguments();
-        if (bundle != null) {
             String anh = bundle.getString("anh");
             String ten = bundle.getString("ten");
             String gia = bundle.getString("gia");
             String mota = bundle.getString("mota");
+            String loaisp = bundle.getString("tenloaisp");
 
             Glide.with(this)
                     .load(anh)
@@ -69,20 +70,20 @@ public class TaoDon extends Fragment {
             tvtensp.setText(ten);
             tvgiasp.setText(gia);
             tvmota.setText(mota);
-        }
-        btndathang = view.findViewById(R.id.btndathang);
-        btndathang.setOnClickListener(new View.OnClickListener() {
+            tvloaisp.setText("vl" +loaisp);
+        themgiohang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFragmentB();
             }
         });
 
+
     return view;
     }
     private void openFragmentB() {
         Fragment fragment = new frag_muahang();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
         transaction.replace(R.id.framelayout, fragment);
         transaction.addToBackStack(null);  // Để có thể quay lại Fragment trước đó
         transaction.commit();

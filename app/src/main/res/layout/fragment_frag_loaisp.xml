@@ -6,7 +6,7 @@
     tools:context=".fragadmin.frag_QLLoaiSP">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvsneakers"
+        android:id="@+id/rcvsneakerloaisp"
         android:layout_width="match_parent"
         android:layout_height="650sp"
         android:layout_marginTop="10dp"

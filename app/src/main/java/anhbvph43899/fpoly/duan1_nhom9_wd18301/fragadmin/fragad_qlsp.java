@@ -198,7 +198,7 @@ int index;
                     } else if(Integer.valueOf(gia) < 0) {
                         Toast.makeText(getContext(), "Giá tiền phải lớn hơn 0", Toast.LENGTH_SHORT).show();
                     }
-                    else if(sanPhamDAO.insert(new SanPham(Integer.parseInt(id), ten, Integer.parseInt(gia), mota, url, index))) {
+                    else if(sanPhamDAO.insert(new SanPham(Integer.parseInt(id), ten, Integer.parseInt(gia), index, mota, url))) {
                         list.clear();
                         list.addAll(sanPhamDAO.selectAll());
                         dialog.dismiss();

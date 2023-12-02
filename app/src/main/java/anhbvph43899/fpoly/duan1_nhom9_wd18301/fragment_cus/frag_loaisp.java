@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.DAO.LoaiSPDAO;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.DAO.SanPhamDAO;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.R;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.adapter.LoaiSPAdapter;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.adapter.LoaiSPCusApdapter;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.adapter.QLSPAdapter;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.LoaiSP;
@@ -42,13 +43,15 @@ public class frag_loaisp extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_frag_loaisp, container, false);
-        rcvsneaker = view.findViewById(R.id.rcvsneakers);
+        rcvsneaker = view.findViewById(R.id.rcvsneakerloaisp);
         loaiSPDAO = new LoaiSPDAO(getContext());
         list = loaiSPDAO.selectAll();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcvsneaker.setLayoutManager(linearLayoutManager);
         loaiSPAdapter = new LoaiSPCusApdapter(getContext(), list);
         rcvsneaker.setAdapter(loaiSPAdapter);
+        loaiSPAdapter.notifyDataSetChanged();
+
         return view;
     }
 }

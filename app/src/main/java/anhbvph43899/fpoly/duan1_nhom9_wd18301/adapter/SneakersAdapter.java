@@ -26,6 +26,8 @@ import java.util.List;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.DAO.SanPhamDAO;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.R;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment_cus.TaoDon;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.fragment_cus.frag_muahang;
+import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.LoaiSP;
 import anhbvph43899.fpoly.duan1_nhom9_wd18301.model.SanPham;
 
 public class SneakersAdapter extends RecyclerView.Adapter<SneakersAdapter.ViewHolder>{
@@ -70,6 +72,16 @@ public class SneakersAdapter extends RecyclerView.Adapter<SneakersAdapter.ViewHo
                 bundle.putString("mota", spdcchon.getMotaSP());
                 bundle.putString("tenloaisp", spdcchon.getLoaisp());
                 fragment.setArguments(bundle);
+
+                Fragment fragment1 = new frag_muahang();
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("anh1", spdcchon.getAnh());
+                bundle1.putString("ten1", spdcchon.getTensp());
+                bundle1.putString("gia1", String.valueOf(spdcchon.getGia()));
+                bundle1.putString("mota1", spdcchon.getMotaSP());
+                bundle1.putString("tenloaisp1", spdcchon.getLoaisp());
+                fragment1.setArguments(bundle1);
+
                 FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
 
                 // Bắt đầu giao dịch FragmentTransaction
